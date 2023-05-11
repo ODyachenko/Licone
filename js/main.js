@@ -304,6 +304,46 @@ if (document.body.classList.contains('ev-date')) {
   });
 }
 
+// Timer
+document.addEventListener('DOMContentLoaded', function () {
+  const hoursItem = document.querySelectorAll('.hours'),
+    minutesItem = document.querySelectorAll('.minutes'),
+    secondsItem = document.querySelectorAll('.seconds');
+
+  let time = 600, // Set the required value in milliseconds
+    hours = 0,
+    minutes = 0,
+    seconds = 0;
+
+  let timerID = setInterval(countDown, 1000);
+
+  function countDown() {
+    if (time >= 3600) {
+      (hours = Math.floor(time / 60 / 60)),
+        (minutes = time % 60),
+        (seconds = (time / 60) % 60);
+    } else if (time < 0) {
+      console.error('Time cannot be negative');
+      clearInterval(timerID);
+    } else {
+      (minutes = Math.floor(time / 60)), (seconds = time % 60);
+    }
+
+    for (let i = 0; i < hoursItem.length; ++i) {
+      hoursItem[i].innerHTML = checkZero(hours);
+      minutesItem[i].innerHTML = checkZero(minutes);
+      secondsItem[i].innerHTML = checkZero(seconds);
+    }
+
+    time == 0 ? clearInterval(timerID) : --time;
+  }
+
+  // Add 0 if element < 10
+  function checkZero(elem) {
+    return elem < 10 ? '0' + elem : elem;
+  }
+});
+
 // Lazy Loading
 if (document.documentElement.clientWidth < 480) {
   window.addEventListener(
