@@ -1,3 +1,8 @@
+// onScroll animation https://michalsnik.github.io/aos/
+if (document.documentElement.clientWidth > 1023) {
+  AOS.init();
+}
+
 // Smooth Scroll
 $(document).on('click', 'a[href^="#"]', function (event) {
   event.preventDefault(),
@@ -358,3 +363,4 @@ if (document.documentElement.clientWidth < 480) {
 } else {
   main();
 }
+
